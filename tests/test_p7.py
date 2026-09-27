@@ -139,3 +139,14 @@ def test_tendances_publiees_et_n_jobs(dossier):
     assert len(tout) == t.periode.nunique() and sum(p["ecoutes"] for p in tout) == int(t.ecoutes.sum())
     assert api.ETAT["modele"].n_jobs == 1
     del os.environ["TENDANCES_CHEMIN"]
+
+
+def test_cors_tolere_barre_oblique():
+    import importlib
+    os.environ["CORS_ORIGINES"] = " https://exemple.vercel.app/ ,"
+    m = importlib.reload(api)
+    try:
+        assert m.origines == ["https://exemple.vercel.app"]
+    finally:
+        os.environ.pop("CORS_ORIGINES")
+        importlib.reload(api)

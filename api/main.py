@@ -56,7 +56,7 @@ def charger(uri=None):
 
 
 app = FastAPI(title="SoundLab API", version="1.0")
-origines = [o for o in os.environ.get("CORS_ORIGINES", "http://localhost:3000").split(",") if o]
+origines = [o.strip().rstrip("/") for o in os.environ.get("CORS_ORIGINES", "http://localhost:3000").split(",") if o.strip()]
 app.add_middleware(CORSMiddleware, allow_origins=origines, allow_methods=["GET", "POST"], allow_headers=["content-type"])
 
 
