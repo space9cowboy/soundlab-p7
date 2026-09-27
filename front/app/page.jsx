@@ -1,5 +1,8 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
+import { OngletDonnees, OngletModele, OngletProduction } from "./analyses";
+
+const ONGLETS = [["priorites", "Priorités"], ["modele", "Modèle"], ["donnees", "Données et dérive"], ["production", "Production"]];
 
 const API = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000").replace(/\/$/, "");
 
@@ -49,6 +52,7 @@ export default function Page() {
   const [titres, setTitres] = useState(null);
   const [tendance, setTendance] = useState(null);
   const [etat, setEtat] = useState("chargement");
+  const [onglet, setOnglet] = useState("priorites");
 
   const rechercher = useCallback(async (f) => {
     const q = new URLSearchParams({ limite: "50" });
@@ -95,6 +99,17 @@ export default function Page() {
       <h1>SoundLab — priorités de promotion</h1>
       <p className="sous">Probabilité qu'un titre atteigne le quart supérieur des écoutes. Un score par titre, jamais par personne.</p>
 
+      <div role="tablist" aria-label="Sections" className="onglets">
+        {ONGLETS.map(([id, nom]) => (
+          <button key={id} role="tab" id={"onglet-" + id} aria-selected={onglet === id} aria-controls={"panneau-" + id} className="onglet" onClick={() => setOnglet(id)}>{nom}</button>
+        ))}
+      </div>
+
+      {onglet === "modele" && <section role="tabpanel" id="panneau-modele" aria-labelledby="onglet-modele"><OngletModele /></section>}
+      {onglet === "donnees" && <section role="tabpanel" id="panneau-donnees" aria-labelledby="onglet-donnees"><OngletDonnees /></section>}
+      {onglet === "production" && <section role="tabpanel" id="panneau-production" aria-labelledby="onglet-production"><OngletProduction /></section>}
+
+      <section role="tabpanel" id="panneau-priorites" aria-labelledby="onglet-priorites" hidden={onglet !== "priorites"}>
       {etat === "chargement" && <p className="message" role="status">Connexion à l'API… Sur l'offre gratuite, elle peut mettre jusqu'à une minute à se réveiller.</p>}
       {etat === "erreur" && <p className="message" role="alert">L'API ne répond pas. Réessayez dans une minute.</p>}
 
@@ -150,6 +165,8 @@ export default function Page() {
 
       <h2>Tendance des écoutes ListenBrainz{filtres.genre ? ` — ${filtres.genre}` : ""}</h2>
       <div className="carte">{tendance ? <Tendance points={tendance} /> : <p className="sous">Tendances indisponibles sur cette instance.</p>}</div>
+
+      </section>
 
       <footer>
         Données : catalogue Kaggle « Million Song Dataset + Spotify + Last.fm » (CC BY-NC 4.0) ; écoutes ListenBrainz (CC0) ;

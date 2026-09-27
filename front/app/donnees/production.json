@@ -1,0 +1,323 @@
+{
+ "hpa": [
+  {
+   "heure": "14:45:22",
+   "cpu": 9,
+   "replicas": 2
+  },
+  {
+   "heure": "14:45:33",
+   "cpu": 9,
+   "replicas": 2
+  },
+  {
+   "heure": "14:45:43",
+   "cpu": 9,
+   "replicas": 2
+  },
+  {
+   "heure": "14:45:53",
+   "cpu": 5,
+   "replicas": 2
+  },
+  {
+   "heure": "14:46:03",
+   "cpu": 11,
+   "replicas": 2
+  },
+  {
+   "heure": "14:46:13",
+   "cpu": 11,
+   "replicas": 2
+  },
+  {
+   "heure": "14:46:23",
+   "cpu": 25,
+   "replicas": 2
+  },
+  {
+   "heure": "14:46:34",
+   "cpu": 37,
+   "replicas": 2
+  },
+  {
+   "heure": "14:46:44",
+   "cpu": 37,
+   "replicas": 2
+  },
+  {
+   "heure": "14:46:54",
+   "cpu": 28,
+   "replicas": 2
+  },
+  {
+   "heure": "14:47:04",
+   "cpu": 27,
+   "replicas": 2
+  },
+  {
+   "heure": "14:47:14",
+   "cpu": 27,
+   "replicas": 2
+  },
+  {
+   "heure": "14:47:24",
+   "cpu": 43,
+   "replicas": 2
+  },
+  {
+   "heure": "14:47:35",
+   "cpu": 44,
+   "replicas": 2
+  },
+  {
+   "heure": "14:47:45",
+   "cpu": 44,
+   "replicas": 2
+  },
+  {
+   "heure": "14:47:55",
+   "cpu": 37,
+   "replicas": 2
+  },
+  {
+   "heure": "14:48:05",
+   "cpu": 37,
+   "replicas": 2
+  },
+  {
+   "heure": "14:48:15",
+   "cpu": 37,
+   "replicas": 2
+  },
+  {
+   "heure": "14:48:25",
+   "cpu": 37,
+   "replicas": 2
+  },
+  {
+   "heure": "14:48:36",
+   "cpu": 70,
+   "replicas": 2
+  },
+  {
+   "heure": "14:48:46",
+   "cpu": 74,
+   "replicas": 3
+  },
+  {
+   "heure": "14:48:56",
+   "cpu": 74,
+   "replicas": 3
+  },
+  {
+   "heure": "14:49:06",
+   "cpu": 66,
+   "replicas": 3
+  },
+  {
+   "heure": "14:49:16",
+   "cpu": 44,
+   "replicas": 3
+  },
+  {
+   "heure": "14:49:26",
+   "cpu": 44,
+   "replicas": 3
+  },
+  {
+   "heure": "14:49:37",
+   "cpu": 39,
+   "replicas": 3
+  },
+  {
+   "heure": "14:49:47",
+   "cpu": 36,
+   "replicas": 3
+  },
+  {
+   "heure": "14:49:57",
+   "cpu": 36,
+   "replicas": 3
+  },
+  {
+   "heure": "14:50:07",
+   "cpu": 45,
+   "replicas": 3
+  },
+  {
+   "heure": "14:50:17",
+   "cpu": 35,
+   "replicas": 3
+  },
+  {
+   "heure": "14:50:27",
+   "cpu": 35,
+   "replicas": 3
+  },
+  {
+   "heure": "14:50:38",
+   "cpu": 35,
+   "replicas": 3
+  },
+  {
+   "heure": "14:50:48",
+   "cpu": 36,
+   "replicas": 3
+  },
+  {
+   "heure": "14:50:58",
+   "cpu": 36,
+   "replicas": 3
+  },
+  {
+   "heure": "14:51:08",
+   "cpu": 37,
+   "replicas": 3
+  },
+  {
+   "heure": "14:51:18",
+   "cpu": 36,
+   "replicas": 2
+  },
+  {
+   "heure": "14:51:28",
+   "cpu": 36,
+   "replicas": 2
+  },
+  {
+   "heure": "14:51:39",
+   "cpu": 41,
+   "replicas": 2
+  },
+  {
+   "heure": "14:51:49",
+   "cpu": 63,
+   "replicas": 2
+  },
+  {
+   "heure": "14:51:59",
+   "cpu": 63,
+   "replicas": 2
+  },
+  {
+   "heure": "14:52:09",
+   "cpu": 50,
+   "replicas": 2
+  },
+  {
+   "heure": "14:52:19",
+   "cpu": 38,
+   "replicas": 2
+  },
+  {
+   "heure": "14:52:29",
+   "cpu": 38,
+   "replicas": 2
+  },
+  {
+   "heure": "14:52:39",
+   "cpu": 38,
+   "replicas": 2
+  },
+  {
+   "heure": "14:52:50",
+   "cpu": 33,
+   "replicas": 2
+  },
+  {
+   "heure": "14:53:00",
+   "cpu": 33,
+   "replicas": 2
+  },
+  {
+   "heure": "14:53:10",
+   "cpu": 31,
+   "replicas": 2
+  },
+  {
+   "heure": "14:53:20",
+   "cpu": 28,
+   "replicas": 2
+  },
+  {
+   "heure": "14:53:30",
+   "cpu": 28,
+   "replicas": 2
+  },
+  {
+   "heure": "14:53:40",
+   "cpu": 19,
+   "replicas": 2
+  },
+  {
+   "heure": "14:53:50",
+   "cpu": 12,
+   "replicas": 2
+  },
+  {
+   "heure": "14:54:01",
+   "cpu": 12,
+   "replicas": 2
+  },
+  {
+   "heure": "14:54:11",
+   "cpu": 3,
+   "replicas": 2
+  },
+  {
+   "heure": "14:54:21",
+   "cpu": 2,
+   "replicas": 2
+  },
+  {
+   "heure": "14:54:31",
+   "cpu": 2,
+   "replicas": 2
+  },
+  {
+   "heure": "14:54:41",
+   "cpu": 2,
+   "replicas": 2
+  },
+  {
+   "heure": "14:54:51",
+   "cpu": 3,
+   "replicas": 2
+  },
+  {
+   "heure": "14:55:02",
+   "cpu": 2,
+   "replicas": 2
+  },
+  {
+   "heure": "14:55:12",
+   "cpu": 2,
+   "replicas": 2
+  },
+  {
+   "heure": "14:55:22",
+   "cpu": 2,
+   "replicas": 2
+  }
+ ],
+ "cible_cpu": 60,
+ "charge": {
+  "requetes": 9989,
+  "debit_moyen": 20.8,
+  "echecs": 0,
+  "p50_ms": 8.3,
+  "p90_ms": 19.8,
+  "p95_ms": 27,
+  "max_s": 5.01
+ },
+ "rollout": {
+  "requetes": 600,
+  "reussies": 600
+ },
+ "dag": {
+  "version_avant": 1,
+  "version_apres": 2,
+  "reentrainement_s": 22.1
+ }
+}

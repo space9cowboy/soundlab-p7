@@ -1,0 +1,92 @@
+{
+ "methode": "Bloc 6 : TreeExplainer sur un echantillon du jeu de test, separation unique GroupShuffleSplit par artiste (20 %, graine 42)",
+ "variables": [
+  {
+   "variable": "artist_taux_hits_hors_piste",
+   "groupe": "artiste",
+   "shap_moyen": 0.1091,
+   "sens": 0.68
+  },
+  {
+   "variable": "artist_plays_moyen_hors_piste",
+   "groupe": "artiste",
+   "shap_moyen": 0.0832,
+   "sens": 0.63
+  },
+  {
+   "variable": "instrumentalness",
+   "groupe": "audio",
+   "shap_moyen": 0.021,
+   "sens": -0.78
+  },
+  {
+   "variable": "danceability",
+   "groupe": "audio",
+   "shap_moyen": 0.017,
+   "sens": 0.81
+  },
+  {
+   "variable": "artist_nb_titres_hors_piste",
+   "groupe": "contexte",
+   "shap_moyen": 0.0163,
+   "sens": 0.61
+  },
+  {
+   "variable": "valence",
+   "groupe": "audio",
+   "shap_moyen": 0.0162,
+   "sens": 0.86
+  },
+  {
+   "variable": "anciennete",
+   "groupe": "contexte",
+   "shap_moyen": 0.0153,
+   "sens": -0.15
+  },
+  {
+   "variable": "acousticness",
+   "groupe": "audio",
+   "shap_moyen": 0.0134,
+   "sens": 0.43
+  },
+  {
+   "variable": "speechiness",
+   "groupe": "audio",
+   "shap_moyen": 0.01,
+   "sens": -0.54
+  },
+  {
+   "variable": "energy",
+   "groupe": "audio",
+   "shap_moyen": 0.0085,
+   "sens": -0.24
+  },
+  {
+   "variable": "loudness",
+   "groupe": "audio",
+   "shap_moyen": 0.0084,
+   "sens": 0.65
+  },
+  {
+   "variable": "tempo",
+   "groupe": "audio",
+   "shap_moyen": 0.0081,
+   "sens": -0.07
+  }
+ ],
+ "ablation": [
+  {
+   "variables": "Audio seul (13)",
+   "auc": 0.5979
+  },
+  {
+   "variables": "Audio + contexte (16)",
+   "auc": 0.6585
+  },
+  {
+   "variables": "Audio + contexte + artiste (18)",
+   "auc": 0.7953
+  }
+ ],
+ "ablation_methode": "Bloc 6, separation unique (a ne pas confondre avec 0,7875 en validation croisee)"
+}

@@ -1,0 +1,86 @@
+{
+ "titres_communs": 29315,
+ "tvd": 0.1425,
+ "genres": [
+  {
+   "genre": "(absent)",
+   "kaggle": 35.86,
+   "listenbrainz": 45.59
+  },
+  {
+   "genre": "rock",
+   "kaggle": 34.89,
+   "listenbrainz": 29.19
+  },
+  {
+   "genre": "electronic",
+   "kaggle": 7.47,
+   "listenbrainz": 7.83
+  },
+  {
+   "genre": "pop",
+   "kaggle": 5.76,
+   "listenbrainz": 2.47
+  },
+  {
+   "genre": "rap",
+   "kaggle": 3.54,
+   "listenbrainz": 1.78
+  },
+  {
+   "genre": "metal",
+   "kaggle": 3.36,
+   "listenbrainz": 6.29
+  },
+  {
+   "genre": "country",
+   "kaggle": 2.79,
+   "listenbrainz": 0.79
+  },
+  {
+   "genre": "folk",
+   "kaggle": 1.56,
+   "listenbrainz": 0.95
+  },
+  {
+   "genre": "rnb",
+   "kaggle": 1.41,
+   "listenbrainz": 1.05
+  },
+  {
+   "genre": "jazz",
+   "kaggle": 0.74,
+   "listenbrainz": 1.23
+  },
+  {
+   "genre": "reggae",
+   "kaggle": 0.73,
+   "listenbrainz": 0.91
+  },
+  {
+   "genre": "new age",
+   "kaggle": 0.66,
+   "listenbrainz": 0.38
+  },
+  {
+   "genre": "punk",
+   "kaggle": 0.64,
+   "listenbrainz": 1.07
+  },
+  {
+   "genre": "latin",
+   "kaggle": 0.28,
+   "listenbrainz": 0.08
+  },
+  {
+   "genre": "world",
+   "kaggle": 0.18,
+   "listenbrainz": 0.12
+  },
+  {
+   "genre": "blues",
+   "kaggle": 0.15,
+   "listenbrainz": 0.27
+  }
+ ]
+}

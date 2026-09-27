@@ -1,10 +1,12 @@
 :root {
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --grille: #e6e6e1;
   --fond: #f7f7f5; --surface: #ffffff; --texte: #1a1a1a; --texte-2: #4a4a4a; --bord: #d4d4d0;
   --accent: #1d4ed8; --accent-fond: #dbe4fb; --alerte: #8a4b00; --alerte-fond: #fff4e0;
 }
 @media (prefers-color-scheme: dark) {
   :root { --fond: #141414; --surface: #1e1e1e; --texte: #f0f0f0; --texte-2: #c4c4c4; --bord: #3a3a3a;
-          --accent: #8fb0ff; --accent-fond: #243152; --alerte: #ffc56b; --alerte-fond: #3a2a10; }
+          --accent: #8fb0ff; --accent-fond: #243152; --alerte: #ffc56b; --alerte-fond: #3a2a10;
+          --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --grille: #2e2e2c; }
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--fond); color: var(--texte); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
@@ -31,3 +33,35 @@ td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
 .message { padding: 12px 16px; border-radius: 6px; background: var(--alerte-fond); color: var(--alerte); margin: 12px 0; }
 footer { margin-top: 40px; font-size: .85rem; color: var(--texte-2); }
 svg text { fill: var(--texte-2); font-size: 11px; }
+
+.onglets { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--bord); margin: 20px 0 16px; }
+.onglet { background: transparent; color: var(--texte-2); border: 0; border-bottom: 3px solid transparent; border-radius: 0; padding: 10px 14px; }
+.onglet[aria-selected="true"] { color: var(--texte); border-bottom-color: var(--accent); font-weight: 600; }
+@media (prefers-color-scheme: dark) { .onglet { color: var(--texte-2); } .onglet[aria-selected="true"] { color: var(--texte); } }
+.grille-graphiques { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr)); gap: 16px; }
+.grille-graphiques > div { background: var(--surface); border: 1px solid var(--bord); border-radius: 8px; padding: 14px; min-width: 0; }
+.grille-graphiques > .large { grid-column: 1 / -1; }
+.graphique { margin: 0; }
+.graphique figcaption { font-weight: 600; margin-bottom: 6px; }
+.zone { position: relative; }
+.zone svg { display: block; overflow: visible; touch-action: pan-y; }
+.grille { stroke: var(--grille); stroke-width: 1; }
+.reference { stroke: var(--texte-2); stroke-width: 1.5; stroke-dasharray: 4 4; }
+.curseur { stroke: var(--texte-2); stroke-width: 1; }
+.zone-fond { fill: var(--accent-fond); opacity: .6; }
+svg .etiquette { fill: var(--texte-2); font-size: 11px; }
+svg .etiquette-serie, svg .etiquette-ligne { fill: var(--texte); font-size: 12px; }
+.infobulle { position: absolute; transform: translate(-50%, 0); pointer-events: none; background: var(--surface); color: var(--texte); border: 1px solid var(--bord); border-radius: 6px; padding: 6px 10px; font-size: .85rem; box-shadow: 0 2px 8px rgba(0,0,0,.15); white-space: nowrap; z-index: 2; }
+.legende { display: flex; flex-wrap: wrap; gap: 4px 16px; list-style: none; padding: 0; margin: 0 0 8px; font-size: .85rem; color: var(--texte-2); }
+.pastille-serie { display: inline-block; width: 14px; height: 4px; border-radius: 2px; margin-right: 6px; vertical-align: middle; border: 0 solid transparent; }
+.note { font-size: .85rem; color: var(--texte-2); margin: 8px 0 0; }
+.tuiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 12px; margin: 12px 0 16px; }
+.tuile { background: var(--surface); border: 1px solid var(--bord); border-radius: 8px; padding: 12px 14px; }
+.tuile-titre { font-size: .85rem; color: var(--texte-2); }
+.tuile-valeur { font-size: 1.5rem; font-weight: 600; font-variant-numeric: tabular-nums; margin: 2px 0; }
+.tuile-note { font-size: .8rem; color: var(--texte-2); }
+.matrice { width: 100%; border-collapse: separate; border-spacing: 2px; text-align: center; }
+.matrice td { padding: 14px 8px; border-radius: 6px; border: 0; text-align: center; font-variant-numeric: tabular-nums; }
+.matrice th { text-align: center; border: 0; }
+.table-donnees { margin: 12px 0; }
+.table-donnees summary { cursor: pointer; color: var(--accent); }

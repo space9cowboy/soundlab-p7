@@ -1,0 +1,147 @@
+{
+ "critere": 50,
+ "k_retenu": 11,
+ "points": [
+  {
+   "granularite": "jour",
+   "k": 3,
+   "part_cases": 18.51,
+   "part_ecoutes": 45.99,
+   "catalogue_tendance": 81.96
+  },
+  {
+   "granularite": "jour",
+   "k": 5,
+   "part_cases": 6.05,
+   "part_ecoutes": 24.34,
+   "catalogue_tendance": 41.28
+  },
+  {
+   "granularite": "jour",
+   "k": 11,
+   "part_cases": 0.66,
+   "part_ecoutes": 6.05,
+   "catalogue_tendance": 10.8
+  },
+  {
+   "granularite": "jour",
+   "k": 20,
+   "part_cases": 0.09,
+   "part_ecoutes": 1.77,
+   "catalogue_tendance": 4.03
+  },
+  {
+   "granularite": "jour",
+   "k": 50,
+   "part_cases": 0.01,
+   "part_ecoutes": 0.32,
+   "catalogue_tendance": 0.65
+  },
+  {
+   "granularite": "semaine",
+   "k": 3,
+   "part_cases": 52.38,
+   "part_ecoutes": 86.14,
+   "catalogue_tendance": 93.02
+  },
+  {
+   "granularite": "semaine",
+   "k": 5,
+   "part_cases": 30.89,
+   "part_ecoutes": 72.34,
+   "catalogue_tendance": 78.23
+  },
+  {
+   "granularite": "semaine",
+   "k": 11,
+   "part_cases": 10.51,
+   "part_ecoutes": 45.36,
+   "catalogue_tendance": 36.56
+  },
+  {
+   "granularite": "semaine",
+   "k": 20,
+   "part_cases": 3.67,
+   "part_ecoutes": 25.9,
+   "catalogue_tendance": 17.33
+  },
+  {
+   "granularite": "semaine",
+   "k": 50,
+   "part_cases": 0.36,
+   "part_ecoutes": 6.18,
+   "catalogue_tendance": 4.64
+  },
+  {
+   "granularite": "mois",
+   "k": 3,
+   "part_cases": 81.36,
+   "part_ecoutes": 97.5,
+   "catalogue_tendance": 94.79
+  },
+  {
+   "granularite": "mois",
+   "k": 5,
+   "part_cases": 65.32,
+   "part_ecoutes": 93.99,
+   "catalogue_tendance": 91.62
+  },
+  {
+   "granularite": "mois",
+   "k": 11,
+   "part_cases": 36.12,
+   "part_ecoutes": 80.35,
+   "catalogue_tendance": 68.52
+  },
+  {
+   "granularite": "mois",
+   "k": 20,
+   "part_cases": 18.84,
+   "part_ecoutes": 63.47,
+   "catalogue_tendance": 41.75
+  },
+  {
+   "granularite": "mois",
+   "k": 50,
+   "part_cases": 4.96,
+   "part_ecoutes": 33.76,
+   "catalogue_tendance": 14.53
+  },
+  {
+   "granularite": "annee",
+   "k": 3,
+   "part_cases": 97.76,
+   "part_ecoutes": 99.85,
+   "catalogue_tendance": 95.02
+  },
+  {
+   "granularite": "annee",
+   "k": 5,
+   "part_cases": 95.85,
+   "part_ecoutes": 99.78,
+   "catalogue_tendance": 94.69
+  },
+  {
+   "granularite": "annee",
+   "k": 11,
+   "part_cases": 88.95,
+   "part_ecoutes": 99.24,
+   "catalogue_tendance": 92.97
+  },
+  {
+   "granularite": "annee",
+   "k": 20,
+   "part_cases": 77.29,
+   "part_ecoutes": 97.46,
+   "catalogue_tendance": 87.18
+  },
+  {
+   "granularite": "annee",
+   "k": 50,
+   "part_cases": 46.86,
+   "part_ecoutes": 87.14,
+   "catalogue_tendance": 60.17
+  }
+ ],
+ "source": "p7_01_seuil_k, job EMR 00g93d5kh33pso1f"
+}
