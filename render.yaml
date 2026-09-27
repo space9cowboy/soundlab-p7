@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: soundlab-api
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./deploy/render/Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: CORS_ORIGINES
+        sync: false

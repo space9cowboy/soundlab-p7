@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: entrainement-
+  namespace: soundlab
+spec:
+  backoffLimit: 0
+  ttlSecondsAfterFinished: 3600
+  template:
+    spec:
+      restartPolicy: Never
+      securityContext: {runAsNonRoot: true, runAsUser: 10001}
+      containers:
+        - name: entrainement
+          image: soundlab-entrainement:1.0
+          imagePullPolicy: IfNotPresent
+          env: [{name: MLFLOW_TRACKING_URI, value: "http://mlflow:5000"}]
+          args: ["--features", "/donnees/features", "--sortie", "/tmp/artefact", "--auc-temoin", "0.7875",
+                 "--tolerance-temoin", "0.005", "--mlflow-uri", "http://mlflow:5000", "--n-jobs", "2"]
+          resources:
+            requests: {cpu: "1", memory: 2Gi}
+            limits: {cpu: "2", memory: 4Gi}
+          volumeMounts:
+            - {name: features, mountPath: /donnees/features, readOnly: true}
+      volumes:
+        - name: features
+          hostPath: {path: /donnees/features, type: Directory}

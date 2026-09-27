@@ -1,0 +1,7 @@
+-r train.txt
+-r api.txt
+-r derive.txt
+sqlalchemy==2.0.36
+alembic==1.14.0
+httpx==0.28.1
+pytest==8.3.4

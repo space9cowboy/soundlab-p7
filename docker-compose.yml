@@ -1,0 +1,87 @@
+name: soundlab-p7
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: mlflow
+      POSTGRES_USER: mlflow
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD absent du fichier .env}
+    volumes:
+      - pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mlflow -d mlflow"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  mlflow:
+    build: {context: ., dockerfile: docker/mlflow.Dockerfile}
+    image: soundlab-mlflow:1.0
+    command: >
+      mlflow server --host 0.0.0.0 --port 5000
+      --backend-store-uri postgresql://mlflow:${POSTGRES_PASSWORD}@postgres:5432/mlflow
+      --artifacts-destination /mlflow/artefacts --serve-artifacts
+    volumes:
+      - mlflow:/mlflow
+    ports: ["127.0.0.1:5000:5000"]
+    depends_on:
+      postgres: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://127.0.0.1:5000/health', timeout=2)"]
+      interval: 10s
+      timeout: 3s
+      retries: 30
+
+  entrainement:
+    build: {context: ., dockerfile: docker/entrainement.Dockerfile}
+    image: soundlab-entrainement:1.0
+    profiles: ["entrainement"]
+    environment:
+      MLFLOW_TRACKING_URI: http://mlflow:5000
+    command: ["--features", "/donnees/features", "--sortie", "/tmp/artefact",
+              "--auc-temoin", "0.7875", "--tolerance-temoin", "0.005", "--mlflow-uri", "http://mlflow:5000"]
+    volumes:
+      - ./data/features:/donnees/features:ro
+    depends_on:
+      mlflow: {condition: service_healthy}
+
+  api:
+    build: {context: ., dockerfile: docker/api.Dockerfile}
+    image: soundlab-api:1.0
+    environment:
+      MLFLOW_TRACKING_URI: http://mlflow:5000
+      MODELE_URI: models:/soundlab-hit@champion
+      CORS_ORIGINES: http://localhost:3000
+      RECHARGEMENT_S: "30"
+    ports: ["127.0.0.1:8000:8000"]
+    depends_on:
+      mlflow: {condition: service_healthy}
+    restart: on-failure
+
+  derive:
+    build: {context: ., dockerfile: docker/derive.Dockerfile}
+    image: soundlab-derive:1.0
+    profiles: ["outils"]
+
+  airflow:
+    image: apache/airflow:2.10.5-python3.11
+    profiles: ["orchestration"]
+    command: standalone
+    user: "0:0"
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
+      HOTE_P7: ${PWD}
+      RESEAU_P7: soundlab-p7_default
+    volumes:
+      - ./orchestration/dags:/opt/airflow/dags:ro
+      - ./data:/opt/airflow/p7data
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports: ["127.0.0.1:8081:8080"]
+    depends_on:
+      mlflow: {condition: service_healthy}
+
+volumes:
+  pg:
+  mlflow:

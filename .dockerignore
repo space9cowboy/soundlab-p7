@@ -1,0 +1,9 @@
+.env
+data
+artefacts
+_archives
+front
+tests
+*.zip
+**/__pycache__
+.git

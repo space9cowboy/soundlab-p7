@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata: {name: mlflow-artefacts, namespace: soundlab}
+spec:
+  accessModes: [ReadWriteOnce]
+  resources: {requests: {storage: 2Gi}}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: mlflow, namespace: soundlab}
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector: {matchLabels: {app: mlflow}}
+  template:
+    metadata: {labels: {app: mlflow}}
+    spec:
+      securityContext: {fsGroup: 10001}
+      containers:
+        - name: mlflow
+          image: soundlab-mlflow:1.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom: {secretKeyRef: {name: soundlab-postgres, key: POSTGRES_PASSWORD}}
+          command: ["sh", "-c"]
+          args:
+            - exec mlflow server --host 0.0.0.0 --port 5000
+              --backend-store-uri postgresql://mlflow:${POSTGRES_PASSWORD}@postgres:5432/mlflow
+              --artifacts-destination /mlflow/artefacts --serve-artifacts
+          ports: [{containerPort: 5000}]
+          readinessProbe:
+            httpGet: {path: /health, port: 5000}
+            periodSeconds: 10
+            failureThreshold: 30
+          resources:
+            requests: {cpu: 200m, memory: 512Mi}
+            limits: {cpu: "1", memory: 1Gi}
+          volumeMounts: [{name: artefacts, mountPath: /mlflow}]
+      volumes:
+        - name: artefacts
+          persistentVolumeClaim: {claimName: mlflow-artefacts}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: mlflow, namespace: soundlab}
+spec:
+  selector: {app: mlflow}
+  ports: [{port: 5000}]

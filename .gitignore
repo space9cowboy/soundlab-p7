@@ -1,0 +1,12 @@
+.env
+data/
+artefacts/
+__pycache__/
+*.pyc
+.pytest_cache/
+_archives/
+*.zip
+front/node_modules/
+front/.next/
+front/.env*.local
+mlruns/
