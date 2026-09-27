@@ -153,7 +153,16 @@ Mesures : le Job d'entraînement reproduit le témoin dans le cluster (AUC 0,788
 
 ## 8. Tableau de bord et hébergement public
 
-**Front** (`front/`, Next.js 14) : bandeau du modèle servi, filtres, tableau des titres, export CSV, courbe des écoutes par genre, message d'attente pendant le réveil de l'API, mentions de licence. Le front ne lit que l'API.
+**Front** (`front/`, Next.js 14), quatre onglets :
+
+| Onglet | Contenu |
+| --- | --- |
+| Priorités | bandeau du modèle servi, filtres, tableau des titres, export CSV, écoutes par genre (lues dans l'API) |
+| Modèle | indicateurs, courbe ROC, matrice de confusion, précision et rappel selon le seuil, répartition des scores, taux de succès par décile, importance SHAP, ablation |
+| Données et dérive | effet du seuil k, dérive mensuelle avec seuil d'alerte, représentativité des genres |
+| Production | test de charge, mise à jour sans coupure, cycle du DAG, CPU et réplicas pendant l'autoscaling |
+
+Les courbes du modèle viennent de `train/evaluer.py`, exécuté dans l'image d'entraînement : prédictions hors pli, mêmes plis que le champion (AUC 0,7888, contrôlée à 0,0005 près). Toutes les données des onglets sont agrégées, sans aucune ligne individuelle. Chaque graphique a une infobulle, une légende et un tableau des données dépliable ; la palette est validée pour le daltonisme dans les deux thèmes. Le classement SHAP et l'ablation viennent du Bloc 6 (séparation unique) et sont étiquetés comme tels.
 
 **Hébergement** :
 

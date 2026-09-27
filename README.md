@@ -56,6 +56,15 @@ pip install -r requirements/test.txt
 pytest tests/
 ```
 
+C'est ce que rejoue l'intégration continue (`.github/workflows/ci.yml`), avant de construire toutes les images de `docker-compose.yml` et l'image Render.
+
+Les tests Spark des jobs `p7_01` et `p7_02` ne sont pas collectés par pytest (leurs noms ne suivent pas `test_*.py`) et ne font pas partie de la CI. Ils se lancent à part, dans un environnement qui dispose de PySpark (absent de `requirements/`) et de Java :
+
+```
+python tests/p7_01_test_seuil_k.py
+python tests/p7_02_test_publier_k.py
+```
+
 ## Écarts assumés au brief
 
 - Next.js au lieu de Dash/Streamlit ; Vercel et Render au lieu de Heroku (plus d'offre gratuite).
