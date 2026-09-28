@@ -112,6 +112,10 @@ Chaque entraînement journalise ses paramètres (300 arbres, `min_samples_leaf=5
 
 **Porte de promotion** (`soundlab_p7/modele.py`, `decider_promotion`) : le candidat est promu `champion` si son AUC n'est pas inférieure à celle du champion de plus de 0,005. Sinon il est enregistré mais pas promu, et la décision est tracée dans les étiquettes du run. Testé par mutation : un modèle entraîné sur des étiquettes mélangées n'est pas promu.
 
+**Choix de la forêt aléatoire** (comparaison du Bloc 6, variante C, mêmes plis) : régression logistique 0,7743 ± 0,0079, forêt aléatoire 0,7875 ± 0,0058, boosting par histogramme 0,7814 ± 0,0034, meilleur boosting sur 8 configurations 0,7855 ± 0,0057. L'écart entre la forêt et le meilleur boosting (0,002) est inférieur à l'écart-type entre plis : le choix n'est pas statistiquement fondé. Il repose sur la continuité avec le prototype, la lisibilité (importances, SHAP exact par TreeExplainer), une stratégie explicite pour les 8,54 % de titres sans historique, peu d'hyperparamètres sensibles et un entraînement court (17 à 22 s), adapté au réentraînement automatique.
+
+**Visualisation de la forêt** (`train/visualiser_foret.py`, onglet Modèle du tableau de bord) : les trois premiers niveaux de l'arbre le plus corrélé à la forêt, avec le nombre de titres et le taux de succès réel de chaque nœud ; la variable de la première question de chacun des 300 arbres ; l'AUC hors pli selon le nombre d'arbres moyennés (un arbre seul environ 0,66, plateau au-delà de 100 arbres). Témoin : l'AUC à 300 arbres doit égaler l'AUC globale hors pli de `evaluation.json`.
+
 ## 6. Orchestration Kubernetes
 
 **Cluster** : kind, Kubernetes v1.37.0, un nœud de contrôle et deux workers (`k8s/kind-config.yaml`). Choix d'un cluster local : aucun coût permanent, contrairement au plan de contrôle d'un service managé.

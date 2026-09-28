@@ -1,0 +1,41 @@
+{
+ "source": "Bloc 6, tâche 12b (ml/13_comparaison_modeles.py, docs/03_rapport_modelisation.md, § 4) : variante C, 18 variables, mêmes 5 plis groupés par artiste",
+ "modeles": [
+  {
+   "nom": "Régression logistique",
+   "famille": "linéaire",
+   "auc": 0.7743,
+   "ecart_type": 0.0079,
+   "precision": 0.429,
+   "gain": 1.72,
+   "manquants": "médiane + indicateur, dans un Pipeline"
+  },
+  {
+   "nom": "Forêt aléatoire (retenue)",
+   "famille": "bagging d'arbres",
+   "auc": 0.7875,
+   "ecart_type": 0.0058,
+   "precision": 0.4398,
+   "gain": 1.76,
+   "manquants": "sentinelle hors domaine + indicateur"
+  },
+  {
+   "nom": "Boosting par histogramme",
+   "famille": "boosting d'arbres",
+   "auc": 0.7814,
+   "ecart_type": 0.0034,
+   "precision": 0.4306,
+   "gain": 1.72,
+   "manquants": "gestion native"
+  },
+  {
+   "nom": "Boosting, meilleure des 8 configurations",
+   "famille": "boosting d'arbres",
+   "auc": 0.7855,
+   "ecart_type": 0.0057,
+   "precision": 0.4317,
+   "gain": 1.73,
+   "manquants": "gestion native"
+  }
+ ]
+}

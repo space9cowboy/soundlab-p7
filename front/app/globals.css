@@ -65,3 +65,7 @@ svg .etiquette-serie, svg .etiquette-ligne { fill: var(--texte); font-size: 12px
 .matrice th { text-align: center; border: 0; }
 .table-donnees { margin: 12px 0; }
 .table-donnees summary { cursor: pointer; color: var(--accent); }
+svg .noeud-titre { fill: #0b0b0b; font-size: 13px; font-weight: 600; }
+svg .noeud-texte { fill: #0b0b0b; font-size: 11px; }
+.explication { font-size: .95rem; }
+.explication li { margin: 4px 0; }

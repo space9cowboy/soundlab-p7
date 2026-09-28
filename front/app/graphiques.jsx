@@ -257,3 +257,99 @@ export function Tuiles({ items }) {
     </div>
   );
 }
+
+// Arbre de decision (niveaux superieurs) : noeuds colores par taux de succes reel
+const RAMPE = ["#cde2fb", "#b7d3f6", "#9ec5f4", "#86b6ef", "#6da7ec", "#5598e7", "#3987e5"];
+export function Arbre({ racine, libelle, formatSeuil, hauteurNiveau = 118, largeur = 960 }) {
+  const [survol, setSurvol] = useState(null);
+  const niveaux = [];
+  const parcourir = (n, prof, pos, parent, cote) => {
+    (niveaux[prof] = niveaux[prof] || []).push({ n, pos, parent, cote, id: `${prof}-${pos}` });
+    if (n.oui) { parcourir(n.oui, prof + 1, pos * 2, `${prof}-${pos}`, "oui"); parcourir(n.non, prof + 1, pos * 2 + 1, `${prof}-${pos}`, "non"); }
+  };
+  parcourir(racine, 0, 0, null, null);
+  const P = niveaux.length, W = largeur, hb = 70;
+  const lbN = (prof) => Math.min(210, W / 2 ** prof - 12);
+  const cx = (prof, pos) => ((pos + 0.5) / 2 ** prof) * W;
+  const cy = (prof) => 12 + prof * hauteurNiveau;
+  const H = cy(P - 1) + hb + 12;
+  const couleur = (t) => RAMPE[Math.min(RAMPE.length - 1, Math.max(0, Math.round((t / 0.7) * (RAMPE.length - 1))))];
+  const tous = niveaux.flat();
+  return (
+    <div className="zone">
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img" aria-label="Trois premiers niveaux d'un arbre de la forêt" onPointerLeave={() => setSurvol(null)}>
+        {tous.filter((o) => o.parent).map((o) => {
+          const [pp, ppos] = o.parent.split("-").map(Number);
+          const x1 = cx(pp, ppos), y1 = cy(pp) + hb, x2 = cx(pp + 1, o.pos), y2 = cy(pp + 1);
+          return (
+            <g key={"l" + o.id}>
+              <path d={`M${x1},${y1} C${x1},${(y1 + y2) / 2} ${x2},${(y1 + y2) / 2} ${x2},${y2}`} fill="none" stroke="var(--texte-2)" strokeWidth={1 + 5 * (o.n.titres / racine.titres)} opacity=".55" />
+              <text x={(x1 + x2) / 2 + (o.cote === "oui" ? -6 : 6)} y={(y1 + y2) / 2 + 4} textAnchor={o.cote === "oui" ? "end" : "start"} className="etiquette">{o.cote}</text>
+            </g>
+          );
+        })}
+        {tous.map((o) => {
+          const [prof] = o.id.split("-").map(Number), lb = lbN(prof), x = cx(prof, o.pos) - lb / 2, y = cy(prof);
+          const feuille = !o.n.variable;
+          return (
+            <g key={o.id} onPointerEnter={() => setSurvol(o)}>
+              <rect x={x} y={y} width={lb} height={hb} rx="6" fill={couleur(o.n.taux_succes)} stroke={survol === o ? "var(--texte)" : "transparent"} strokeWidth="2" />
+              <text x={x + lb / 2} y={y + 18} textAnchor="middle" className="noeud-titre">{Math.round(o.n.taux_succes * 100)} %{feuille ? "" : " de succès"}</text>
+              <text x={x + lb / 2} y={y + 34} textAnchor="middle" className="noeud-texte">{o.n.titres.toLocaleString("fr-FR")} titres</text>
+              {!feuille && <text x={x + lb / 2} y={y + 52} textAnchor="middle" className="noeud-texte">{libelle(o.n.variable, true)}</text>}
+              {!feuille && <text x={x + lb / 2} y={y + 65} textAnchor="middle" className="noeud-texte">≤ {formatSeuil(o.n.variable, o.n.seuil)} ?</text>}
+              {feuille && <text x={x + lb / 2} y={y + 55} textAnchor="middle" className="noeud-texte">suite…</text>}
+            </g>
+          );
+        })}
+      </svg>
+      <Infobulle pos={survol ? { x: (cx(Number(survol.id.split("-")[0]), survol.pos) / W) * 100, y: ((cy(Number(survol.id.split("-")[0])) + hb) / H) * 100 } : null}>
+        {survol && <>
+          <b>{survol.n.titres.toLocaleString("fr-FR")} titres, {fmt(survol.n.taux_succes * 100, 1)} % de succès réels</b>
+          {survol.n.variable && <div>Question : {libelle(survol.n.variable)} ≤ {formatSeuil(survol.n.variable, survol.n.seuil)} ?</div>}
+        </>}
+      </Infobulle>
+    </div>
+  );
+}
+
+// Points avec intervalle (moyenne +- ecart-type), echelle resserree
+export function Intervalles({ titre, lignes, xMin, xMax, xFormat = (v) => fmt(v), gauche = 230, largeur = LARGEUR, couleurRetenue, reference }) {
+  const L = largeur;
+  const [survol, setSurvol] = useState(null);
+  const hl = 40, H = M.h + lignes.length * hl + 30, G = gauche, D = 70;
+  const sx = (v) => G + ((v - xMin) / (xMax - xMin)) * (L - G - D);
+  return (
+    <figure className="graphique">
+      <figcaption>{titre}</figcaption>
+      <div className="zone">
+        <svg viewBox={`0 0 ${L} ${H}`} width="100%" role="img" aria-label={titre} onPointerLeave={() => setSurvol(null)}>
+          {axeY(xMin, xMax).map((v) => (
+            <g key={v}>
+              <line x1={sx(v)} x2={sx(v)} y1={M.h - 4} y2={H - 26} className="grille" />
+              <text x={sx(v)} y={H - 8} textAnchor="middle" className="etiquette">{xFormat(v)}</text>
+            </g>
+          ))}
+          {reference && <g><line x1={sx(reference.x)} x2={sx(reference.x)} y1={M.h - 4} y2={H - 26} className="reference" /><text x={sx(reference.x) + 4} y={M.h + 4} className="etiquette">{reference.nom}</text></g>}
+          {lignes.map((l, i) => {
+            const y = M.h + i * hl + hl / 2, c = l.retenue ? couleurRetenue : "var(--texte-2)";
+            return (
+              <g key={l.nom} onPointerEnter={() => setSurvol(i)}>
+                <rect x={0} y={y - hl / 2} width={L} height={hl} fill="transparent" />
+                <text x={G - 10} y={y + 4} textAnchor="end" className="etiquette-ligne" fontWeight={l.retenue ? 600 : 400}>{l.nom}</text>
+                <line x1={sx(l.valeur - l.ecart)} x2={sx(l.valeur + l.ecart)} y1={y} y2={y} stroke={c} strokeWidth="2" />
+                <line x1={sx(l.valeur - l.ecart)} x2={sx(l.valeur - l.ecart)} y1={y - 6} y2={y + 6} stroke={c} strokeWidth="2" />
+                <line x1={sx(l.valeur + l.ecart)} x2={sx(l.valeur + l.ecart)} y1={y - 6} y2={y + 6} stroke={c} strokeWidth="2" />
+                <circle cx={sx(l.valeur)} cy={y} r="6" fill={c} stroke="var(--surface)" strokeWidth="2" />
+                <text x={sx(l.valeur + l.ecart) + 8} y={y + 4} className="etiquette">{xFormat(l.valeur)}</text>
+              </g>
+            );
+          })}
+        </svg>
+        <Infobulle pos={survol !== null ? { x: 60, y: ((M.h + survol * hl) / H) * 100 } : null}>
+          {survol !== null && <><b>{lignes[survol].nom}</b><div>{xFormat(lignes[survol].valeur)} ± {xFormat(lignes[survol].ecart)}</div>{lignes[survol].note && <div>{lignes[survol].note}</div>}</>}
+        </Infobulle>
+      </div>
+    </figure>
+  );
+}
